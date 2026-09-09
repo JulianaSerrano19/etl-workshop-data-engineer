@@ -5,7 +5,7 @@ Diseño de un Modelo Dimensional de Datos (Esquema en Estrella).
 
 A continuación se presenta el modelo dimensional del proyecto:
 
-<img width="1312" height="1199" alt="Modelo Dimensional" src="https://github.com/user-attachments/assets/4d08b303-3fc6-4ffd-9bc3-64d530745c4c" />
+<img width="1312" height="1199" alt="WhatsApp Image 2026-09-08 at 10 46 03 PM" src="https://github.com/user-attachments/assets/0cbceb46-f2f8-43f1-a9b7-64bc2dedf700" />
 
 ---
 
