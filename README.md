@@ -40,7 +40,7 @@ A continuación se presenta el modelo dimensional del proyecto:
 | country           |                       | full_date          |
 +-------------------+                       | year / month / day |
                                             +--------------------+
-# Arquitectura y Justificación del Diseño
+# **Arquitectura y Justificación del Diseño**
 ¿Por qué un modelo en estrella?
 Elegí un esquema en estrella porque simplifica enormemente los JOINs entre la tabla de hechos (fact_applications) y las dimensiones. En lugar de anidar múltiples niveles de relaciones, cada dimensión se conecta directamente a la tabla central, lo que se traduce en consultas más rápidas y más fáciles de leer — algo clave tanto si el análisis se hace desde SQL como desde Pandas o una herramienta de BI.
 
