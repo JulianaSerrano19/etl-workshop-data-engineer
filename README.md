@@ -1,9 +1,7 @@
-```markdown
+
 ## Workshop-1
 
-Diseño de un Modelo Dimensional de Datos (Esquema en Estrella).
-
-A continuación se presenta el modelo dimensional del proyecto:
+Diseño de un Modelo Dimensional de Datos (Esquema en Estrella):
 
 ```text
                         +--------------------+
