@@ -1,11 +1,43 @@
 ```markdown
 # Workshop-1
 
-Diseño de un Modelo Dimensional de Datos (Esquema en Estrella).
-
-A continuación se presenta el modelo dimensional del proyecto:
-
-<img width="1312" height="1199" alt="WhatsApp Image 2026-09-08 at 10 46 03 PM" src="https://github.com/user-attachments/assets/0cbceb46-f2f8-43f1-a9b7-64bc2dedf700" />
+Diseño de un Modelo Dimensional de Datos (Esquema en Estrella):
+```text
+                        +--------------------+
+                        |   dim_technology   |
+                        +--------------------+
+                        | technology_id (PK) |
+                        | technology_name    |
+                        +---------+----------+
+                                  |
+                                  |
++-------------------+             |             +--------------------+
+|   dim_candidate   |             |             |   dim_seniority    |
++-------------------+             v             +--------------------+
+| candidate_id (PK) |   +-------------------+   | seniority_id  (PK) |
+| first_name        |-->| fact_applications |<--| seniority_level    |
+| last_name         |   +-------------------+   +--------------------+
+| email             |   | application_id(PK)|
+                        | candidate_id  (FK)|
+                        | technology_id (FK)|
+                        | seniority_id  (FK)|
+                        | location_id   (FK)|
+                        | date_id       (FK)|
+                        | code_challenge... |
+                        | technical_inter...|
+                        | is_hired          |
+                        +---------+---------+
+                                  ^
+                                  |
+            +---------------------+---------------------+
+            |                                           |
++-----------+-------+                       +-----------+--------+
+|   dim_location    |                       |      dim_date      |
++-------------------+                       +--------------------+
+| location_id  (PK) |                       | date_id       (PK) |
+| country           |                       | full_date          |
++-------------------+                       | year / month / day |
+                                            +--------------------+
 
 ---
 
