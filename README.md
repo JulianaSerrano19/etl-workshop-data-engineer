@@ -51,10 +51,10 @@ ORDER BY contrataciones DESC;
 
   Hallazgos Clave de Negocio (Insights)
 
-* **Efectividad del Proceso:** De las 50,000 postulaciones analizadas, aproximadamente el **13.2% (6,599 candidatos)** cumplieron simultáneamente con el criterio de corte ($\ge 7$ en prueba técnica y entrevista).
-* **Demanda Tecnológica:** Las tecnologías con mayor volumen de contratación fueron **Development - CMS Backend** y **Sales**, seguidas muy de cerca por **React Frontend** y **Client Success**.
-* **Distribución por Seniority:** Tras la imputación de datos basada en experiencia (`Yoe`), los niveles **Lead**, **Senior** y **Mid-Level** concentraron la mayor cantidad de contrataciones.
-* **Estabilidad Geográfica:** Los mercados de USA, Brasil, Colombia y Ecuador mostraron una tendencia de contratación uniforme entre 2021 y 2025, con el pico esperado de corte en el volumen del año en curso (2026).
+*Efectividad del Proceso:** De las 50,000 postulaciones analizadas, aproximadamente el **13.2% (6,599 candidatos)** cumplieron simultáneamente con el criterio de corte ($\ge 7$ en prueba técnica y entrevista).
+*Demanda Tecnológica:** Las tecnologías con mayor volumen de contratación fueron **Development - CMS Backend** y **Sales**, seguidas muy de cerca por **React Frontend** y **Client Success**.
+*Distribución por Seniority:** Tras la imputación de datos basada en experiencia (`Yoe`), los niveles **Lead**, **Senior** y **Mid-Level** concentraron la mayor cantidad de contrataciones.
+*Estabilidad Geográfica:** Los mercados de USA, Brasil, Colombia y Ecuador mostraron una tendencia de contratación uniforme entre 2021 y 2025, con el pico esperado de corte en el volumen del año en curso (2026).
 
 
 
