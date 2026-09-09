@@ -1,53 +1,20 @@
-<img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/0e99990a-9792-4c22-891f-09c5adff51a9" /># Workshop-1
+#Workshop-1
 
 Diseño de un Modelo Dimensional de Datos (Esquema en Estrella).
 
 A continuación se presenta el modelo dimensional del proyecto:
 
 ```text
-                        +--------------------+
-                        |   dim_technology   |
-                        +--------------------+
-                        | technology_id (PK) |
-                        | technology_name    |
-                        +---------+----------+
-                                  |
-                                  |
-+-------------------+             |             +--------------------+
-|   dim_candidate   |             |             |   dim_seniority    |
-+-------------------+             v             +--------------------+
-| candidate_id (PK) |   +-------------------+   | seniority_id  (PK) |
-| first_name        |-->| fact_applications |<--| seniority_level    |
-| last_name         |   +-------------------+   +--------------------+
-| email             |   | application_id(PK)|
-                        | candidate_id  (FK)|
-                        | technology_id (FK)|
-                        | seniority_id  (FK)|
-                        | location_id   (FK)|
-                        | date_id       (FK)|
-                        | code_challenge... |
-                        | technical_inter...|
-                        | is_hired          |
-                        +---------+---------+
-                                  ^
-                                  |
-            +---------------------+---------------------+
-            |                                           |
-+-----------+-------+                       +-----------+--------+
-|   dim_location    |                       |      dim_date      |
-+-------------------+                       +--------------------+
-| location_id  (PK) |                       | date_id       (PK) |
-| country           |                       | full_date          |
-+-------------------+                       | year / month / day |
-                                            +--------------------+
+  <img width="1312" height="1199" alt="WhatsApp Image 2026-09-08 at 10 46 03 PM" src="https://github.com/user-attachments/assets/4d08b303-3fc6-4ffd-9bc3-64d530745c4c" />
+
 ## Arquitectura y Justificación del Diseño
 ¿Por qué un modelo en estrella?
 Elegí un esquema en estrella porque simplifica enormemente los JOINs entre la tabla de hechos (fact_applications) y las dimensiones. En lugar de anidar múltiples niveles de relaciones, cada dimensión se conecta directamente a la tabla central, lo que se traduce en consultas más rápidas y más fáciles de leer — algo clave tanto si el análisis se hace desde SQL como desde Pandas o una herramienta de BI.
 
-# Definiendo el grano
+### Definiendo el grano
 Antes de diseñar las tablas, definí qué representa cada fila de la fact table: una postulación individual de un candidato en una fecha específica. Esta decisión es la base de todo el modelo, porque permite calcular con precisión promedios de puntaje, tasas de contratación y métricas de experiencia sin ambigüedad sobre qué se está midiendo.
 
-# Cómo se organizaron las dimensiones
+### Cómo se organizaron las dimensiones
 dim_candidate: Separa la información personal (first_name, last_name, email) del resto del modelo. Esto no solo evita duplicar datos demográficos, sino que también aísla la información de identificación personal (PII).
 
 dim_location y dim_technology: Normalizan los nombres de países y tecnologías para evitar la redundancia de texto en la tabla de hechos.
@@ -56,7 +23,7 @@ dim_seniority: Categoriza los niveles de experiencia (Trainee, Junior, Mid-Level
 
 dim_date: Descompone la fecha de aplicación en year, month y day para optimizar las consultas temporales y agregaciones por año.
 
-# Proceso ETL (Extracción, Transformación y Carga)
+### Proceso ETL (Extracción, Transformación y Carga)
 El pipeline ETL procesa el conjunto de datos crudos de candidatos, aplica transformaciones de calidad de datos y lógica de negocio, y carga los datos estructurados en un Data Warehouse local en SQLite.
 
 a. Extracción (Extract)
@@ -76,10 +43,10 @@ Ejecución: Los DataFrames transformados se persisten en la base de datos relaci
 
 Integridad de Datos: Se ejecutan validaciones de recuento de filas tras la carga para confirmar cero pérdida de datos (por ejemplo, 50,000 registros de postulaciones verificados exitosamente en fact_applications).
 
-# KPIs y Visualizaciones
+### KPIs y Visualizaciones
 Todas las visualizaciones analíticas y de KPIs se generan directamente desde el Data Warehouse (dw_candidates.db) mediante consultas SQL relacionales conectadas con las tablas de dimensión.
 
-# Consultas SQL Ejecutadas:
+### Consultas SQL Ejecutadas:
 Contrataciones por Tecnología:
 SELECT dt.technology_name, COUNT(fa.application_id) AS total_hires
 FROM fact_applications fa
@@ -88,21 +55,21 @@ WHERE fa.is_hired = 1
 GROUP BY dt.technology_name
 ORDER BY total_hires DESC;
 
-# Contrataciones por Año:
+### Contrataciones por Año:
 SELECT dd.year, COUNT(fa.application_id) AS total_hires
 FROM fact_applications fa
 JOIN dim_date dd ON fa.date_id = dd.date_id
 WHERE fa.is_hired = 1
 GROUP BY dd.year;
 
-# Contrataciones por Seniority:
+### Contrataciones por Seniority:
 SELECT ds.seniority_level, COUNT(fa.application_id) AS total_hires
 FROM fact_applications fa
 JOIN dim_seniority ds ON fa.seniority_id = ds.seniority_id
 WHERE fa.is_hired = 1
 GROUP BY ds.seniority_level;
 
-# Contrataciones por País a lo largo del Tiempo:
+### Contrataciones por País a lo largo del Tiempo:
 SELECT dd.year, dl.country, COUNT(fa.application_id) AS total_hires
 FROM fact_applications fa
 JOIN dim_location dl ON fa.location_id = dl.location_id
