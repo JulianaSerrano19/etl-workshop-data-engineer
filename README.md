@@ -49,7 +49,7 @@ WHERE f.is_hired = 1
 GROUP BY t.technology_name 
 ORDER BY contrataciones DESC;
 
-###  Hallazgos Clave de Negocio (Insights)
+  Hallazgos Clave de Negocio (Insights)
 
 * **Efectividad del Proceso:** De las 50,000 postulaciones analizadas, aproximadamente el **13.2% (6,599 candidatos)** cumplieron simultáneamente con el criterio de corte ($\ge 7$ en prueba técnica y entrevista).
 * **Demanda Tecnológica:** Las tecnologías con mayor volumen de contratación fueron **Development - CMS Backend** y **Sales**, seguidas muy de cerca por **React Frontend** y **Client Success**.
